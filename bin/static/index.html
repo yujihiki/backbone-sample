@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8"/>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+		<title>Marionette</title>
+		<link href="./lib/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+		<script type="text/template" id="preview-template">
+			<div><span data-name="title"></span></div>
+			<div><span data-name="description"></span></div>
+		</script>
+	</head>
+	<body>
+		<div class="navbar navbar-inverse navbar-fixed-app">
+			<div class="navbar-inner">
+				<div class="container">
+					<span class="navbar-brand">Newspaper's contents</span>
+				</div>
+			</div>
+		</div>
+
+		<section id="contents">
+			<section id="preview"></section>
+			<section id="itemview"></section>
+		</section>
+
+		<script src="./lib/requirejs/require.js" data-main="app/main.js"></script>
+	</body>
+</html>
