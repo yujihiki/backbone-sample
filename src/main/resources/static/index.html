@@ -4,8 +4,13 @@
 <head>
 	<meta charset="UTF-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<title>Marionette</title>
+	<title>News Contents Editor.</title>
 	<link href="./lib/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+	<style>
+		[draggable] {
+			cursor: move
+		}
+	</style>
 </head>
 
 <body>
@@ -13,12 +18,18 @@
 		<h1>News Contents Editor.</h1>
 	</div>
 
-	<section id="contents" class="container-fluid">
+	<div id="contents" class="container-fluid">
 		<div class="row">
-			<section id="preview" class="col-md-8"></section>
-			<section id="itemview" class="col-md-4"></section>
+			<div class="col-md-8">
+				<div class="row">
+					<div id="top-content"></div>
+				</div>
+				<div id="second-contents"></div>
+				<div id="third-contents"></div>
+			</div>
+			<div id="itemview" class="col-md-4"></div>
 		</div>
-	</section>
+	</div>
 
 	<script src="./lib/requirejs/require.js" data-main="app/main.js"></script>
 </body>

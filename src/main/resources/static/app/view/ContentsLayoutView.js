@@ -3,7 +3,9 @@ define(['marionette'], function () {
 	var ContentsLayoutView = Marionette.LayoutView.extend({
 		el: "#contents",
 		regions: {
-			preview: "#preview",
+			topContent:'#top-content',
+			secondContents:'#second-contents',
+			thirdContents:'#third-contents',
 			itemview: "#itemview"
 		}
 	});

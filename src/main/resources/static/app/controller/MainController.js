@@ -1,23 +1,29 @@
 define([
-	'ContentsLayoutView', 'GridView', 'ContentPreviewView',
+	'ContentsLayoutView', 'GridView', 'TopContentView', 'SecondContentsView', 'ThirdContentsView',
 	'NewsContentCollection', 'NewsContentModel', 'marionette'],
 	function (
-		ContentsLayoutView, GridView, ContentPreviewView,
+		ContentsLayoutView, GridView, TopContentView, SecondContentsView, ThirdContentsView,
 		NewsContentCollection, NewsContentModel
 	) {
 		"use strict";
 		return Marionette.Object.extend({
 			// Model
 			contentCollection: null,
-			contentModel: null,
+			topContentModel: null,
+			secondContentCollection: null,
+			thirdConentCollection: null,
 			// View
 			contentsLayoutView: null,
 			gridView: null,
-			contentPreviewView: null,
+			topContentView: null,
+			secondContentsView: null,
+			thirdContentsView: null,
 			initialize: function (options) {
 				// Initialize Model
+				this.topContentModel = new NewsContentModel();
 				this.contentCollection = new NewsContentCollection();
-				this.contentModel = new NewsContentModel();
+				this.secondContentCollection = new NewsContentCollection(),
+				this.thirdContentCollection = new NewsContentCollection(),
 				// Fetch Collection
 				//this.contentCollection.fetch({
 				//	contentType: 'application/json; charset=UTF-8',
@@ -27,31 +33,57 @@ define([
 				// Initialize LayoutView
 				this.contentsLayoutView = new ContentsLayoutView();
 				// Initialize View
-				this.contentPreviewView = new ContentPreviewView({
-					collection: this.contentCollection
+				this.topContentView = new TopContentView({
+					model: this.topContentModel
+				});
+				this.secondContentsView = new SecondContentsView({
+					collection: this.secondContentCollection
+				});
+				this.thirdContentsView = new ThirdContentsView({
+					collection: this.thirdContentCollection
 				});
 				this.gridView = new GridView({
 					collection: this.contentCollection
 				});
 				// Setting events
-				this.listenTo(this.contentPreviewView, "title:click", function (data) {
-					console.log(data);
+				this.listenTo(this.topContentView, "top:dropContent", function (data) {
+					console.log("top:dropContent :" + JSON.stringify(data));
+					this.topContentModel.set(this.contentCollection.where({'title': data.title})[0].toJSON());
+				});
+				this.listenTo(this.secondContentsView, "second:dropContent", function (data) {
+					console.log("second:dropContent :" + JSON.stringify(data));
+					this.secondContentCollection.at(data.index).set(this.contentCollection.where({'title': data.title})[0].toJSON());
+				});
+				this.listenTo(this.thirdContentsView, "third:dropContent", function (data) {
+					console.log("third:dropContent :" + JSON.stringify(data));
+					this.thirdContentCollection.at(data.index).set(this.contentCollection.where({'title': data.title})[0].toJSON());
 				});
 			},
 			home: function (param) {
-				console.log("home....");
-				$("#nav_home").attr("class", "active");
-				$("#nav_summary").attr("class", "");
-				this.contentsLayoutView.getRegion('preview').show(this.contentPreviewView);
-				this.contentsLayoutView.getRegion('itemview').show(this.gridView);
-				for(var num = 0;num < 10;num++) {
+				for(var idx = 0;idx < 10;idx++) {
 					this.contentCollection.add({
-						'contentId': num,
-						'title': 'Content-' + num,
-						'overview': 'Overview-' + num,
-						'description': 'Description-' + num,
+						'contentId': idx,
+						'title': 'Content-' + idx,
+						'overview': 'Overview-' + idx,
+						'description': 'Description-' + idx,
 					});
 				}
+				// 先頭のコンテンツをTopContentViewに表示
+				this.topContentModel.set(this.contentCollection.at(0).toJSON());
+				// 2～4番目をSecondContentsViewに表示
+				for(var idx = 1;idx < 4;idx++) {
+					this.secondContentCollection.add(this.contentCollection.at(idx).toJSON());
+				}
+				// 残りをThirdContentsViewに表示
+				for(var idx = 4;idx < 10;idx++) {
+					this.thirdContentCollection.add(this.contentCollection.at(idx).toJSON());
+				}
+				$("#nav_home").attr("class", "active");
+				$("#nav_summary").attr("class", "");
+				this.contentsLayoutView.getRegion('topContent').show(this.topContentView);
+				this.contentsLayoutView.getRegion('secondContents').show(this.secondContentsView);
+				this.contentsLayoutView.getRegion('thirdContents').show(this.thirdContentsView);
+				this.contentsLayoutView.getRegion('itemview').show(this.gridView);
 			},
 		});
 	}

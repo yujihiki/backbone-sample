@@ -13,8 +13,9 @@
 			'NewsContentCollection': 'model/NewsContentCollection',
 			// View
 			'ContentsLayoutView': 'view/ContentsLayoutView',
-			'ContentPreviewView': 'view/ContentPreviewView',
-			'ContentImageView': 'view/ContentImageView',
+			'TopContentView': 'view/TopContentView',
+			'SecondContentsView': 'view/SecondContentsView',
+			'ThirdContentsView': 'view/ThirdContentsView',
 			'GridView': 'view/GridView',
 			'GridRowView': 'view/GridRowView',
 			// Controller
