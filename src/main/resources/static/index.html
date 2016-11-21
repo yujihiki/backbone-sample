@@ -2,13 +2,27 @@
 <html lang="ja">
 
 <head>
-	<meta charset="UTF-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<title>News Contents Editor.</title>
-	<link href="./lib/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="Content-Language" content="ja">
+	<meta http-equiv="Content-Style-Type" content="text/css; charset=UTF-8">
+	<meta http-equiv="Content-Script-Type" content="text/javascript; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="mixi-check-robots" content="nodescription, noimage">
+	<title>経済、株価、ビジネス、政治のニュース:日経電子版</title>
+	<link href="./lib/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="./app/css/home.css" media="screen,tv,projection,print">
 	<style>
 		[draggable] {
 			cursor: move
+		}
+		#CONTENTS_MAIN {
+			float: left;
+		}
+		#itemview {
+			float: right;
+		}
+		.drag-enter {
+			background-color:gray;
 		}
 	</style>
 </head>
@@ -18,17 +32,28 @@
 		<h1>News Contents Editor.</h1>
 	</div>
 
-	<div id="contents" class="container-fluid">
-		<div class="row">
-			<div class="col-md-8">
-				<div class="row">
-					<div id="top-content"></div>
+	<div id="contents">
+		<div id="CONTENTS_MAIN">
+			<div id="JSID_baseRefreshNxTop2">
+
+				<!-- TOP記事 -->
+				<div id="top-content"></div>
+
+				<!-- CM -->
+				<div class="m-block prtextPremium a-mb16">
+					<ul id="ADVERTISE_PREMIUM_TEXT_TARGET" class="m-prtext" style="height:20px;">
+						<li>[CM]</li>
+					</ul>
 				</div>
+
+				<!-- Second記事 -->
 				<div id="second-contents"></div>
+
+				<!-- Third記事 -->
 				<div id="third-contents"></div>
 			</div>
-			<div id="itemview" class="col-md-4"></div>
 		</div>
+		<div id="itemview"></div>
 	</div>
 
 	<script src="./lib/requirejs/require.js" data-main="app/main.js"></script>

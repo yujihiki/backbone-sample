@@ -1,2 +1,21 @@
-<div class="panel-heading"><%= title %></div>
-<div class="panel-body"><%= overview %></div>
+<div class="cmn-article_title">
+	<h3><a href="#" class=""><span class="cmnc-large"><%= title %></span></a></h3>
+</div>
+<div class="cmn-photo_style1 cmn-position_right" style="width: 316px;">
+	<a href="#" class=""><img src="<%= contentsImage %>" height="195" width="316" title="" alt=""></a>
+</div>
+<div class="cmn-article_summary">
+	<p><%= overview %>
+		<a href="#" class="">…続き</a>
+		<span class="cmnc-time"><%= contentsDate %></span>
+	</p>
+</div>
+<div class="cmn-related_article cmn-clearfix">
+	<h4 class="cmn-hide">関連記事</h4>
+	<ul class="cmnc-link_list cmn-clearfix">
+		<li><a href="#" target="_self"><%= children[0].title %></a></li>
+		<li><a href="#" target="_self"><%= children[1].title %></a></li>
+		<li><a href="#" target="_self"><%= children[2].title %></a></li>
+		<li><a href="#" target="_self"><%= children[3].title %></a></li>
+	</ul>
+</div>

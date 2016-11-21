@@ -63,9 +63,25 @@ define([
 				for(var idx = 0;idx < 10;idx++) {
 					this.contentCollection.add({
 						'contentId': idx,
-						'title': 'Content-' + idx,
-						'overview': 'Overview-' + idx,
-						'description': 'Description-' + idx,
+						'title': '記事タイトル９９９９９９-' + idx,
+						'overview': '記事概要９９９９９９９９９９９９９９９９９９９９９９９９９９９９９９-' + idx,
+						'description': '記事詳細９９９９９９９９９９９９９９９９９９９９９９９９９９９９９９-' + idx,
+						'contentsDate': idx + ":00",
+						'contentsImage': './app/image/contents-' + idx + '.png',
+						'children': [
+							{
+								'title': '関連記事タイトル-' + idx + '-0',
+							},
+							{
+								'title': '関連記事タイトル-' + idx + '-1',
+							},
+							{
+								'title': '関連記事タイトル-' + idx + '-2',
+							},
+							{
+								'title': '関連記事タイトル-' + idx + '-3',
+							},
+						]
 					});
 				}
 				// 先頭のコンテンツをTopContentViewに表示
