@@ -60,7 +60,8 @@ define([
 				});
 			},
 			home: function (param) {
-				for(var idx = 0;idx < 10;idx++) {
+				// ダミーモデル生成
+				for(var idx = 0;idx < 20;idx++) {
 					this.contentCollection.add({
 						'contentId': idx,
 						'title': '記事タイトル９９９９９９-' + idx,
@@ -94,6 +95,7 @@ define([
 				for(var idx = 4;idx < 10;idx++) {
 					this.thirdContentCollection.add(this.contentCollection.at(idx).toJSON());
 				}
+				// タブアクティブ化と画面表示
 				$("#nav_home").attr("class", "active");
 				$("#nav_summary").attr("class", "");
 				this.contentsLayoutView.getRegion('topContent').show(this.topContentView);
