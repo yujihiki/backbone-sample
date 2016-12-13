@@ -13,6 +13,9 @@ define(
 			dragStart: function(event, data, clone, element) {
 				console.log("dragStart : " + this.model.get("title"));
 				event.originalEvent.dataTransfer.setData('Text', this.model.get("title"));
+				console.log("dragStart : " + this.model.get("contentId"));
+				event.originalEvent.dataTransfer.setData('flag', new Boolean(false));
+				
 			},
 			dragOver: function(event) {
 				event.preventDefault();

@@ -1,9 +1,21 @@
 <div class="cmn-article_title">
 	<h3><a href="#" class=""><span class="cmnc-middle"><%= title %></span></a></h3>
 </div>
+
 <div class="cmn-photo_style1 cmn-position_right" style="width: 150px;">
-	<a href="#" class=""><img src="<%= contentsImage %>" width="150" title="" alt=""></a>
+	<div class="swiper-container">
+		<div class="swiper-wrapper">
+			<div class="swiper-slide"><img src="<%= contents[0].image %>" width="150" title="" alt=""></div>
+			<div class="swiper-slide"><img src="<%= contents[1].image %>" width="150" title="" alt=""></div>
+			<div class="swiper-slide"><img src="<%= contents[2].image %>" width="150" title="" alt=""></div>
+			<div class="swiper-slide"><img src="./app/image/noimage.png" width="150" title="" alt=""></div>
+		</div>
+		<div class="swiper-pagination"></div>
+		<div class="swiper-button-next"></div>
+		<div class="swiper-button-prev"></div>
+	</div>
 </div>
+
 <div class="cmn-article_summary">
 	<p><%= overview %>
 		<a href="#" class="cmnc-continue">…続き</a><span class="cmnc-time"><%= contentsDate %></span>

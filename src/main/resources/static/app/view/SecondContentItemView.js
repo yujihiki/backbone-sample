@@ -23,6 +23,8 @@ define(
 			dragStart: function (event, data, clone, element) {
 				console.log("dragStart : ", this.model.attributes);
 				event.originalEvent.dataTransfer.setData('Text', this.model.get("title"));
+				event.originalEvent.dataTransfer.setData('flag', new Boolean(true));
+				event.originalEvent.dataTransfer.setData('Content', "Second");
 			},
 			dragOver: function (event) {
 				event.preventDefault();
@@ -39,7 +41,15 @@ define(
 				this.$el.removeClass('drag-enter');
 				var title = event.originalEvent.dataTransfer.getData('Text');
 				console.log("dropped :" + title);
-				this.trigger("second-item:dropContent", {index:this._index, title: title});
+				
+				var flag = event.originalEvent.dataTransfer.getData('flag');
+				if(flag !== "true"){
+					console.log("押し下げ")
+					this.trigger("second-item:dropContent", {index:this._index, title: title});
+				}
+				else{	
+					this.trigger("swap:"+event.originalEvent.dataTransfer.getData('Content'), {index:this._index, title: title});
+				}
 			},
 		});
 		return SecondContentItemView;

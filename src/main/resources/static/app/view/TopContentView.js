@@ -6,8 +6,8 @@ define(
 			events: {
 				'dragstart': 'dragStart',
 				'dragover': 'dragOver',
-				'dragenter':'dragEnter',
-				'dragleave':'dragLeave',
+				'dragenter': 'dragEnter',
+				'dragleave': 'dragLeave',
 				'drop': 'dropped',
 			},
 			modelEvents: {
@@ -23,10 +23,14 @@ define(
 			dragStart: function (event, data, clone, element) {
 				console.log("dragStart : ", this.model.attributes);
 				event.originalEvent.dataTransfer.setData('Text', this.model.get("title"));
+				event.originalEvent.dataTransfer.setData('flag', new Boolean(true));
+				event.originalEvent.dataTransfer.setData('Content', "Top");
+
+
 			},
 			dragOver: function (event) {
 				event.preventDefault();
-				if(!this.$el.hasClass('drag-enter')) this.$el.addClass('drag-enter');
+				if (!this.$el.hasClass('drag-enter')) this.$el.addClass('drag-enter');
 			},
 			dragEnter: function (event) {
 				this.$el.addClass('drag-enter');
@@ -39,7 +43,15 @@ define(
 				this.$el.removeClass('drag-enter');
 				var title = event.originalEvent.dataTransfer.getData('Text');
 				console.log("dropped :" + title);
-				this.trigger("top:dropContent", {index:null, title: title});
+
+				var flag = event.originalEvent.dataTransfer.getData('flag');
+				if (flag !== "true") {
+					console.log("押し下げ")
+					this.trigger("top:dropContent", { index: null, title: title });
+				}
+				else{
+					this.trigger("swap:"+event.originalEvent.dataTransfer.getData('Content'), { index: null, title: title });
+				}
 			},
 		});
 		return TopContentView;
